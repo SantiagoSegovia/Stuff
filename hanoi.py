@@ -1,29 +1,29 @@
 #!/usr/bin/python
-#************************************************************************
-#*     **************************  *****************  *******************
-#  ***  *************** *********  *****************  ************** ****
-#  *******     ***      *********  ******  ***  ****  ****     ***** ****
-#*     **  ***  *  ***  **     **      **  ***  **      *  ***  **** ****
-#*****  *       **      *  ***  *  ***  **      ****  ***       **** ****
-#  ***  *  ***********  *  ***  *  ***  ******  ****  ***  **************
-#*     ***      *      ***     **      **      *****  ****      **** ****
-#************************************************************************
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#@     @@@@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@
+#  @@@  @@@@@@@@@@@@@@@ @@@@@@@@@  @@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@ @@@@
+#  @@@@@@@     @@@      @@@@@@@@@  @@@@@@  @@@  @@@@  @@@@     @@@@@ @@@@
+#@     @@  @@@  @  @@@  @@     @@      @@  @@@  @@      @  @@@  @@@@ @@@@
+#@@@@@  @       @@      @  @@@  @  @@@  @@      @@@@  @@@       @@@@ @@@@
+#  @@@  @  @@@@@@@@@@@  @  @@@  @  @@@  @@@@@@  @@@@  @@@  @@@@@@@@@@@@@@
+#@     @@@      @      @@@     @@      @@      @@@@@  @@@@      @@@@ @@@@
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #------------------------------------------------------------------------
-#| Author: Santiago Segovia                                             |
-#| Title:  Hanoi solution                                               |
-#| Date:   14/12/2017                                                   |
-#| Help key: -h or --help                                               |
+#| Author:   Santiago Segovia                                           |
+#| Title:    Hanoi solution                                             |
+#| Date:     14/12/2017                                                 |
+#| Help key: None                                                       |
 #------------------------------------------------------------------------
 
 import os
 import sys
 import time
-sys.path.append(os.path.join(os.path.realpath("."),"Colors"))
+import appendAll
+#sys.path.append(os.path.join(os.path.realpath("."),"Colors"))
 from colorama import *
-sys.path.append(os.path.join(os.path.realpath("."),"cosas"))
+#sys.path.append(os.path.join(os.path.realpath("."),"cosas"))
 import My_logger as logger
 log = logger.get_log()
-log.info("Starting code")
 hanoi_level = 0
 DEBUG = False
 LARGE = True
@@ -98,7 +98,6 @@ def printHanoi(o_i,a_i,d_i,o,a,d):
         if LARGE:
             print (" " + "*"*(MAX_LENGTH -2) + " ")*3
         f.write((" " + "*"*(MAX_LENGTH -2) + " ")*3 + "\n")
-
 def printStatus(title,o_i,a_i,d_i,orig,aux,dest,level):
     if LARGE:
         print title
@@ -167,12 +166,10 @@ def main():
         B.append(0)
         C.append(0)
     printHanoi(1,2,3,A,B,C)
-    start_time = timeit.default_timer()
     while True:
         [A,C,B] = hanoi(1,3,2,A,C,B,hanoi_level)
         [B,A,C] = hanoi(2,1,3,B,A,C,hanoi_level)
         [C,B,A] = hanoi(3,2,1,C,B,A,hanoi_level)
-    elapsed = timeit.default_timer() - start_time
     if not (GRAPHS or LARGE):
         print "Time: %s"%str(elapsed)
 
