@@ -40,7 +40,7 @@ class Logger:
     class __Logger:
         def __init__(self, filename):
             filename = os.path.realpath(filename)
-            if os.path.exists(filename):
+            """if os.path.exists(filename):
                 [name,ext] = os.path.splitext(filename)
                 if ext != ".log":
                     print "WARNING:  Invalid extention %s. Changing to .log"%ext
@@ -48,9 +48,9 @@ class Logger:
                 count = 0
                 while os.path.exists(name + ".%02i"%count + ext):
                     count += 1
-                filename = name + ".%02i"%count + ext
+                filename = name + ".%02i"%count + ext"""
             self.output = filename
-            self.file = open(filename,"w")
+            self.file = open(filename,"a")
             self.user = os.environ['COMPUTERNAME']
             self.date = time.strftime("%d/%m/%Y")
             self.hour = time.strftime("%I:%M:%S")
@@ -143,13 +143,19 @@ def get_log():
 def main():
     global creator
     print "Creating logger..."
+    sys.stdout.flush()
     creator = Logger(__file__)
     log = creator.getting_log()
     print "Logger ready :)"
+    sys.stdout.flush()
     printHelp()
+    sys.stdout.flush()
     log.info("Logger used in test Mode")
+    sys.stdout.flush()
     while True:
-        asking = raw_input(">>> log.")
+        print ">>> log."
+        sys.stdout.flush()
+        asking = raw_input()
         if asking.startswith('debug(') and asking.endswith(')'):
             msg = asking.strip(')').strip('debug(')[1:-1]
             log.debug(msg)
@@ -167,6 +173,7 @@ def main():
             log.success(msg)
         elif asking == "exit()":
             log.exit()
+        sys.stdout.flush()
             
 
 if __name__ == "__main__":
