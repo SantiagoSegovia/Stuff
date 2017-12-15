@@ -153,7 +153,7 @@ def main():
     log.info("Logger used in test Mode")
     sys.stdout.flush()
     while True:
-        print ">>> log."
+        sys.stdout.write(">>> log.")
         sys.stdout.flush()
         asking = raw_input()
         if asking.startswith('debug(') and asking.endswith(')'):
