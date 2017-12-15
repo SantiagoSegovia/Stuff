@@ -97,7 +97,10 @@ def printHanoi(o_i,a_i,d_i,o,a,d):
             f.write("%s%s%s\n"%(A_s,B_s,C_s))
         if LARGE:
             print (" " + "*"*(MAX_LENGTH -2) + " ")*3
+        if not _is_cmd:
+            sys.stdout.flush()
         f.write((" " + "*"*(MAX_LENGTH -2) + " ")*3 + "\n")
+
 def printStatus(title,o_i,a_i,d_i,orig,aux,dest,level):
     if LARGE:
         print title
