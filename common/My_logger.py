@@ -40,15 +40,6 @@ class Logger:
     class __Logger:
         def __init__(self, filename):
             filename = os.path.realpath(filename)
-            """if os.path.exists(filename):
-                [name,ext] = os.path.splitext(filename)
-                if ext != ".log":
-                    print "WARNING:  Invalid extention %s. Changing to .log"%ext
-                    ext = ".log"
-                count = 0
-                while os.path.exists(name + ".%02i"%count + ext):
-                    count += 1
-                filename = name + ".%02i"%count + ext"""
             self.output = filename
             self.file = open(filename,"a")
             self.user = os.environ['COMPUTERNAME']
@@ -56,7 +47,7 @@ class Logger:
             self.hour = time.strftime("%I:%M:%S")
             self.file.write("%s\n\nUser: %s\nDate: %s\nHour: %s\nFile: %s\nLogName: %s\n\n"%(header,self.user,self.date,self.hour,os.path.basename(log_name),self.output))
         def __str__(self):
-            return repr(self)
+            return self.output
         def debug(self,Msg):
             _str = "DEBUG:    %s"%(Msg)
             self.file.write(_str + "\n")
@@ -81,7 +72,7 @@ class Logger:
             print _str
             if exit:
                 self.exit()
-        def exit(self,exit_code = 0, Msg = ""):
+        def exit(self,exit_code = 0, Msg = "",erase = False):
             if Msg != "":
                 _str = "EXITTING: %s"%(Msg)
                 self.file.write(_str + "\n")
@@ -103,6 +94,11 @@ class Logger:
                 self.file.close()
             except:
                 pass
+            if erase:
+                if _is_cmd:
+                    os.system("del /s %s"%(self.output))
+                else:
+                    os.system("rm -f %s"%(self.output))
             sys.exit(exit_code)
             
     

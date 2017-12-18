@@ -19,11 +19,9 @@ import os
 import sys
 import time
 import appendAll
-#sys.path.append(os.path.join(os.path.realpath("."),"Colors"))
 from colorama import *
-#sys.path.append(os.path.join(os.path.realpath("."),"cosas"))
 import My_logger as logger
-log = logger.get_log()
+
 hanoi_level = 0
 DEBUG = False
 LARGE = True
@@ -31,7 +29,7 @@ GRAPHS = True
 MAX_LENGTH = 3+11*2
 EXTRA = (MAX_LENGTH -3) / 2
 MAX_LEVEL = EXTRA - 1
-f = open("hanoi_solution.txt","w")
+
 try:
     rc = os.system("clear")
     if rc != 0:
@@ -176,8 +174,11 @@ def main():
     if not (GRAPHS or LARGE):
         print "Time: %s"%str(elapsed)
 
-main()
-f.close()
-log.exit(50)
-if _is_cmd:
-    raw_input("Press Enter to Finish")
+if __name__ == "__main__":
+    log = logger.get_log()
+    f = open("hanoi_solution.txt","w")
+    main()
+    f.close()
+    log.exit(50)
+    if _is_cmd:
+        raw_input("Press Enter to Finish")
