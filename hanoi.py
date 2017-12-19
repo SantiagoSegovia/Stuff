@@ -26,9 +26,10 @@ hanoi_level = 0
 DEBUG = False
 LARGE = True
 GRAPHS = True
-MAX_LENGTH = 3+11*2
+MAX_LENGTH = 3+21*2
 EXTRA = (MAX_LENGTH -3) / 2
 MAX_LEVEL = EXTRA - 1
+sleep_time = 0.2
 
 try:
     rc = os.system("clear")
@@ -69,7 +70,7 @@ def printHanoi(o_i,a_i,d_i,o,a,d):
                 B = towers[i]
             if idxs[i] == 3:
                 C = towers[i]
-        time.sleep(1)
+        time.sleep(sleep_time)
         if _is_cmd:
             os.system("cls")
         else:
@@ -79,15 +80,27 @@ def printHanoi(o_i,a_i,d_i,o,a,d):
             B_d = B[i-1]
             C_d = C[i-1]
             if A_d > 0:
-                A_s = " "*(EXTRA - A_d) + disks[A_d] + " " + " "*(A_d-(A_d/10)) + "%i"%A_d +" "*A_d + " " + clean + " "*(EXTRA - A_d)
+                if A_d > 9:
+                    add=1
+                else:
+                    add=0
+                A_s = " "*(EXTRA - A_d) + disks[A_d] + " " + " "*(A_d-add) + "%i"%A_d +" "*A_d + " " + clean + " "*(EXTRA - A_d)
             else:
                 A_s = " "*MAX_LENGTH
             if B_d > 0:
-                B_s = " "*(EXTRA - B_d) + disks[B_d] + " " + " "*(B_d-(B_d/10)) + "%i"%B_d +" "*B_d + " " + clean + " "*(EXTRA - B_d)
+                if B_d > 9:
+                    add=1
+                else:
+                    add=0
+                B_s = " "*(EXTRA - B_d) + disks[B_d] + " " + " "*(B_d-add) + "%i"%B_d +" "*B_d + " " + clean + " "*(EXTRA - B_d)
             else:
                 B_s = " "*MAX_LENGTH
             if C_d > 0:
-                C_s = " "*(EXTRA - C_d) + disks[C_d] + " " + " "*(C_d-(C_d/10)) + "%i"%C_d +" "*C_d + " " + clean + " "*(EXTRA - C_d)
+                if C_d > 9:
+                    add=1
+                else:
+                    add=0
+                C_s = " "*(EXTRA - C_d) + disks[C_d] + " " + " "*(C_d-add) + "%i"%C_d +" "*C_d + " " + clean + " "*(EXTRA - C_d)
             else:
                 C_s = " "*MAX_LENGTH
             if LARGE:
@@ -171,8 +184,6 @@ def main():
         [A,C,B] = hanoi(1,3,2,A,C,B,hanoi_level)
         [B,A,C] = hanoi(2,1,3,B,A,C,hanoi_level)
         [C,B,A] = hanoi(3,2,1,C,B,A,hanoi_level)
-    if not (GRAPHS or LARGE):
-        print "Time: %s"%str(elapsed)
 
 if __name__ == "__main__":
     log = logger.get_log()
