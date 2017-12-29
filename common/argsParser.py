@@ -26,6 +26,12 @@ log = logger.get_log()
 
 parser = None
 
+def copyOfList(list):
+    res = []
+    for child in list:
+        res.append(child)
+    return res
+
 class parserClass:
     class args:
         def __init__(self):
@@ -120,10 +126,10 @@ class parserClass:
             self.printHelp()
             log.exit(erase = True)
         [actions_l,actions_s] = self.getActionList()
-        actions = actions_l
+        actions = copyOfList(actions_l)
         actions.extend(actions_s)
         [options_l,options_s] = self.getOptionList()
-        options = options_l
+        options = copyOfList(options_l)
         options.extend(options_s)
         used = []
         for i in range(len(sys.argv)):

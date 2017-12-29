@@ -71,6 +71,7 @@ def main():
         print arguments.numberOfPins
         print arguments.isDemo
         print arguments.version
+        raw_input()
     except:
         log.error("Error in main application level.")
         log.exit(50)
