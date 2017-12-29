@@ -29,7 +29,7 @@ GRAPHS = True
 MAX_LENGTH = 3+21*2
 EXTRA = (MAX_LENGTH -3) / 2
 MAX_LEVEL = EXTRA - 1
-sleep_time = 0.05
+sleep_time = 0.03
 
 try:
     rc = os.system("clear")
